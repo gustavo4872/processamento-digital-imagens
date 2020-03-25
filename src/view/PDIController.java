@@ -1,8 +1,11 @@
 package view;
 
-
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,14 +20,33 @@ public class PDIController {
 	@FXML Text labelG;
 	@FXML Text labelB;
 	
+	@FXML TextField prctR;
+	@FXML TextField prctG;
+	@FXML TextField prctB;
+	
 	@FXML ImageView imageView1;
 	@FXML ImageView imageView2;
 	@FXML ImageView imageView3;
+	
+	@FXML Slider slider;
+	
+	@FXML ToggleGroup vizinhos;
+	@FXML RadioButton vizinhosCruz;
+	@FXML RadioButton vizinhosX;
+	@FXML RadioButton vizinhos3x3;
 	
 	
 	private Image img1;
 	private Image img2;
 	private Image img3;
+	
+	@FXML
+	public void initialize() {
+		vizinhos = new ToggleGroup();
+		vizinhosCruz.setToggleGroup(vizinhos);
+		vizinhosX.setToggleGroup(vizinhos);
+		vizinhos3x3.setToggleGroup(vizinhos);
+	}
 	
 	
 	@FXML
@@ -51,7 +73,7 @@ public class PDIController {
 						   "*.png", "*.PNG", "*.gif", "*.GIF", 
 						   "*.bmp", "*.BMP")); 	
 		   fileChooser.setInitialDirectory(new File(
-				   "C:/Users/Gusta/Pictures/imgs")); 
+				   "D:\\Program Files (x86)\\Eclipse\\workspace\\processamento-digital-imagens\\src\\imgs")); 
 		   File imgSelec = fileChooser.showOpenDialog(null);
 		   try {
 			   if (imgSelec != null) {
@@ -93,7 +115,35 @@ public class PDIController {
 	
 	@FXML
 	public void cinzaAritmetica() {
-		img3 = PDI.cinzaMediaAritmetica(img1, 0, 0, 0);
+		img3 = PDI.cinzaMediaAritmetica(imageView1.getImage(), 0, 0, 0);
 		atualizaImage3();
 	}
+	
+	@FXML
+	public void cinzaPonderada() {
+		img3 = PDI.cinzaMediaAritmetica(imageView1.getImage(), 
+				Integer.parseInt(prctR.getText()), 
+				Integer.parseInt(prctG.getText()), 
+				Integer.parseInt(prctB.getText()));
+		atualizaImage3();
+	}
+	
+	@FXML
+	public void limiarizacao() {		
+		img3 = PDI.limiarizacao(imageView1.getImage(), slider.getValue()/255.0);
+		atualizaImage3();
+	}
+	
+	@FXML
+	public void negativa() {		
+		img3 = PDI.negativa(imageView1.getImage());
+		atualizaImage3();
+	}
+	
+	@FXML
+	public void eliminaRuidos() {	
+		img3 = PDI.eliminaRuidos(imageView1.getImage(), ((RadioButton) vizinhos.getSelectedToggle()).getText());
+		atualizaImage3();
+	}
+	
 }
