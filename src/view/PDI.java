@@ -128,25 +128,53 @@ public class PDI {
 			
 			ArrayColor vizinhos;
 			
-			for (int i = 1; i < w; i++) {
-				for (int j = 1; j < h; j++) {
-					
-					double opacity = pr.getColor(i, j).getOpacity();
-					
-					if (buttonId.equals("Vizinhos Cruz")) {
-						vizinhos = vizinhosCruz(imagem, pr, i, j, new ArrayColor(5));						
-					}else if (buttonId.equals("Vizinhos X")) {
-						vizinhos = vizinhosX(imagem, pr, i, j, new ArrayColor(5));								
-					}else {
-						vizinhos = vizinhos3x3(imagem, pr, i, j, new ArrayColor(9));												
-					}
-					
-					vizinhos.sort();					
-					pw.setColor(i, j, vizinhos.getMiddleColor(opacity));
-					
-				}
+			if (buttonId.equals("Vizinhos Cruz")) {
+				for (int x = 1; x < w; x++) {
+					for (int y = 1; y < h; y++) {
+						vizinhos = new ArrayColor(5);
+						vizinhos.addColor(pr.getColor(x-1, y));
+						vizinhos.addColor(pr.getColor(x, y-1));
+						vizinhos.addColor(pr.getColor(x, y));
+						vizinhos.addColor(pr.getColor(x, y+1));						
+						vizinhos.addColor(pr.getColor(x+1, y));						
+						vizinhos.sort();					
+						pw.setColor(x, y, vizinhos.getMedian());
+						
+					}	
+				}					
+										
+			}else if (buttonId.equals("Vizinhos X")) {
+				for (int x = 1; x < w; x++) {
+					for (int y = 1; y < h; y++) {
+						vizinhos = new ArrayColor(5);
+						vizinhos.addColor(pr.getColor(x-1, y-1));
+						vizinhos.addColor(pr.getColor(x-1, y+1));
+						vizinhos.addColor(pr.getColor(x, y));
+						vizinhos.addColor(pr.getColor(x+1, y-1));
+						vizinhos.addColor(pr.getColor(x+1, y+1));
+						vizinhos.sort();					
+						pw.setColor(x, y, vizinhos.getMedian());
+					}	
+				}								
+			}else {
+				for (int x = 1; x < w; x++) {
+					for (int y = 1; y < h; y++) {
+						vizinhos = new ArrayColor(9);
+						vizinhos.addColor(pr.getColor(x-1, y-1));
+						vizinhos.addColor(pr.getColor(x-1, y));
+						vizinhos.addColor(pr.getColor(x-1, y+1));
+						vizinhos.addColor(pr.getColor(x, y-1));
+						vizinhos.addColor(pr.getColor(x, y));
+						vizinhos.addColor(pr.getColor(x, y+1));
+						vizinhos.addColor(pr.getColor(x+1, y-1));
+						vizinhos.addColor(pr.getColor(x+1, y));
+						vizinhos.addColor(pr.getColor(x+1, y+1));
+						vizinhos.sort();					
+						pw.setColor(x, y, vizinhos.getMedian());
+					}	
+				}												
 			}
-			
+
 			return wi;
 
 		} catch (Exception e) {
@@ -155,37 +183,6 @@ public class PDI {
 		}
 
 		
-	}
-	
-	private static ArrayColor vizinhosCruz(Image imagem, PixelReader pr, int x, int y, ArrayColor newArrayColor) {		
-		newArrayColor.addColor(0, pr.getColor(x, y));
-		newArrayColor.addColor(1, pr.getColor(x, y+1));
-		newArrayColor.addColor(2, pr.getColor(x, y-1));
-		newArrayColor.addColor(3, pr.getColor(x+1, y));
-		newArrayColor.addColor(4, pr.getColor(x-1, y));
-		return newArrayColor;
-	}
-	
-	private static ArrayColor vizinhosX(Image imagem, PixelReader pr, int x, int y, ArrayColor newArrayColor) {
-		newArrayColor.addColor(0, pr.getColor(x, y));
-		newArrayColor.addColor(1, pr.getColor(x-1, y-1));
-		newArrayColor.addColor(2, pr.getColor(x-1, y+1));
-		newArrayColor.addColor(3, pr.getColor(x+1, y-1));
-		newArrayColor.addColor(4, pr.getColor(x+1, y+1));
-		return newArrayColor;
-	}
-	
-	private static ArrayColor vizinhos3x3(Image imagem, PixelReader pr, int x, int y, ArrayColor newArrayColor){		
-		newArrayColor.addColor(0, pr.getColor(x-1, y-1));
-		newArrayColor.addColor(1, pr.getColor(x-1, y));
-		newArrayColor.addColor(2, pr.getColor(x-1, y+1));
-		newArrayColor.addColor(3, pr.getColor(x, y-1));
-		newArrayColor.addColor(4, pr.getColor(x, y));
-		newArrayColor.addColor(5, pr.getColor(x, y+1));
-		newArrayColor.addColor(6, pr.getColor(x+1, y-1));
-		newArrayColor.addColor(7, pr.getColor(x+1, y));
-		newArrayColor.addColor(8, pr.getColor(x+1, y+1));
-		return newArrayColor;
 	}
 	
 }
