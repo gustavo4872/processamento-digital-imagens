@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
@@ -14,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PDIController">
+<AnchorPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PDIController">
    <children>
       <BorderPane prefHeight="519.0" prefWidth="767.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -22,37 +29,120 @@
                <children>
                   <Accordion>
                     <panes>
-                      <TitledPane text="Tons de Cinza">
+                      <TitledPane prefHeight="230.0" text="Tons de Cinza">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#cinzaAritmetica" prefHeight="25.0" prefWidth="157.0" text="Média Aritmética" />
+                                          <Button mnemonicParsing="false" onAction="#cinzaAritmetica" text="Média Aritmética" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\%R">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin></Text>
+                                          <TextField fx:id="prctR" />
+                                          <Text layoutX="10.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%G" />
+                                          <TextField fx:id="prctG" layoutX="10.0" layoutY="52.0" />
+                                          <Text layoutX="10.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%B" />
+                                          <TextField fx:id="prctB" layoutX="10.0" layoutY="94.0" />
+                                          <Button mnemonicParsing="false" onAction="#cinzaPonderada" text="Média Ponderada">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Button>
                                        </children>
                                     </VBox>
                                  </children>
                               </AnchorPane>
                         </content>
                       </TitledPane>
-                      <TitledPane text="Limiarização">
+                      <TitledPane prefHeight="115.0" text="Limiarização">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Slider fx:id="slider" max="250.0" showTickLabels="true" showTickMarks="true" />
+                                          <Button mnemonicParsing="false" onAction="#limiarizacao" text="Limiarizar">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
                         </content>
                       </TitledPane>
-                      <TitledPane text="Negativa">
+                      <TitledPane prefHeight="70.0" text="Negativa">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#negativa" text="Negativa" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children></AnchorPane>
                         </content>
                       </TitledPane>
                         <TitledPane expanded="false" text="Adição / Subtração">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox layoutX="42.0" layoutY="-34.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\% Imagem 1" />
+                                          <Slider fx:id="sliderImg1" showTickLabels="true" showTickMarks="true" value="50.0">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Slider>
+                                          <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\% Imagem 2">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Text>
+                                          <Slider fx:id="sliderImg2" layoutX="10.0" layoutY="27.0" showTickLabels="true" showTickMarks="true" value="50.0">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Slider>
+                                          <Button mnemonicParsing="false" onAction="#adicao" prefWidth="180.0" text="Adição">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#subtracao" prefWidth="180.0" text="Subtração">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
                           </content>
                         </TitledPane>
                         <TitledPane expanded="false" text="Ruídos">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox layoutX="35.0" layoutY="-51.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <RadioButton fx:id="vizinhosCruz" mnemonicParsing="false" text="Vizinhos Cruz" />
+                                          <RadioButton fx:id="vizinhosX" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Vizinhos X">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </RadioButton>
+                                          <RadioButton fx:id="vizinhos3x3" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" text="Vizinhos 3x3">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </RadioButton>
+                                          <Button mnemonicParsing="false" onAction="#eliminaRuidos" text="Eliminar Ruídos">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
                           </content>
                         </TitledPane>
                         <TitledPane expanded="false" text="Equalização de Histograma">
@@ -76,7 +166,7 @@
                     <content>
                       <AnchorPane>
                            <children>
-                              <ImageView fx:id="imageView1" fitHeight="150.0" fitWidth="200.0" onMouseMoved="#rasterImg" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <ImageView fx:id="imageView1" fitHeight="150.0" fitWidth="200.0" onMouseMoved="#rasterImg" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -85,7 +175,7 @@
                      <content>
                         <AnchorPane>
                            <children>
-                              <ImageView fx:id="imageView2" fitHeight="150.0" fitWidth="200.0" onMouseMoved="#rasterImg" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <ImageView fx:id="imageView2" fitHeight="150.0" fitWidth="200.0" onMouseMoved="#rasterImg" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -94,7 +184,7 @@
                      <content>
                         <AnchorPane>
                            <children>
-                              <ImageView fx:id="imageView3" fitHeight="150.0" fitWidth="200.0" onMouseMoved="#rasterImg" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <ImageView fx:id="imageView3" fitHeight="150.0" fitWidth="200.0" onMouseMoved="#rasterImg" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -111,7 +201,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="180.0" top="10.0" />
+                              <Insets left="203.0" top="10.0" />
                            </HBox.margin>
                         </Text>
                         <Text fx:id="labelG" fill="WHITE" layoutX="160.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="G: 000" wrappingWidth="110.0">
@@ -130,18 +220,21 @@
                               <Insets left="50.0" top="10.0" />
                            </HBox.margin>
                         </Text>
-                        <Button mnemonicParsing="false" text="Histograma">
+                        <Text fx:id="labelXY" fill="WHITE" layoutX="533.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X,Y:0,0" wrappingWidth="176.0">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
                            <HBox.margin>
-                              <Insets top="15.0" />
+                              <Insets left="50.0" top="10.0" />
                            </HBox.margin>
-                        </Button>
+                        </Text>
                      </children>
                   </HBox>
                   <HBox prefHeight="70.0" prefWidth="689.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#abreImagem1" style="-fx-background-color: #3b6bb7;" text="Abrir Imagem 1" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="180.0" top="15.0" />
+                              <Insets left="203.0" top="15.0" />
                            </HBox.margin>
                            <font>
                               <Font name="System Bold" size="12.0" />
@@ -155,7 +248,15 @@
                               <Insets left="55.0" top="15.0" />
                            </HBox.margin>
                         </Button>
-                        <Button layoutX="265.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #3b6bb7;" text="Salvar" textFill="WHITE">
+                        <Button layoutX="265.0" layoutY="10.0" mnemonicParsing="false" onAction="#salvar" style="-fx-background-color: #3b6bb7;" text="Salvar" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="55.0" top="15.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button layoutX="533.0" layoutY="25.0" mnemonicParsing="false" onAction="#abreModalHistograma" style="-fx-background-color: #3b6bb7;" text="Histograma" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
