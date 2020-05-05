@@ -47,7 +47,7 @@
                                           <TextField fx:id="prctB" layoutX="10.0" layoutY="94.0" />
                                           <Button mnemonicParsing="false" onAction="#cinzaPonderada" text="Média Ponderada">
                                              <VBox.margin>
-                                                <Insets top="10.0" />
+                                                <Insets top="5.0" />
                                              </VBox.margin>
                                           </Button>
                                        </children>
@@ -147,13 +147,75 @@
                         </TitledPane>
                         <TitledPane expanded="false" text="Equalização de Histograma">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox layoutX="31.0" layoutY="-34.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#equalizacao" text="Todos os pixels">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#equalizacaoValidos" text="Somente os válidos">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
                           </content>
                         </TitledPane>
-                        <TitledPane expanded="false" text="Teste">
+                        <TitledPane animated="false" prefHeight="70.0" text="Cores Selecionadas">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#identificarCores" text="Identificar Cores" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
                           </content>
+                        </TitledPane>
+                        <TitledPane animated="false" layoutX="10.0" layoutY="160.0" prefHeight="115.0" text="Grade">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Distância" />
+                                          <TextField fx:id="distancia" />
+                                          <Button mnemonicParsing="false" onAction="#grade" text="Aplicar Efeito">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                        <TitledPane animated="false" layoutX="10.0" layoutY="185.0" prefHeight="115.0" text="Efeito Zebrado">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Colunas" />
+                                          <TextField fx:id="colunas" />
+                                          <Button mnemonicParsing="false" onAction="#efeitoZebrado" text="Aplicar Efeito">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
                         </TitledPane>
                     </panes>
                   </Accordion>

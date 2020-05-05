@@ -61,6 +61,14 @@ public class PDIController {
 	@FXML RadioButton vizinhosX;
 	@FXML RadioButton vizinhos3x3;
 	
+	//Menu: grade
+	@FXML TextField distancia;
+	
+	//Menu: efeito zebrado
+	@FXML TextField colunas;
+	
+	private int x1, y1, x2, y2;
+	
 	@FXML
 	public void initialize() {
 		vizinhos = new ToggleGroup();
@@ -199,8 +207,6 @@ public class PDIController {
 		atualizaImage3();
 	}
 	
-	private int x1, y1, x2, y2;
-	
 	@FXML
 	public void onMousePressed(MouseEvent evt){
 		 ImageView iw = (ImageView)evt.getTarget();
@@ -250,4 +256,32 @@ public class PDIController {
 		}
 	}
 	
+	@FXML
+	public void equalizacao() {
+		img3 = PDI.equalizacaoHistograma(img1, true);
+		atualizaImage3();
+	}
+	
+	@FXML
+	public void equalizacaoValidos() {
+		img3 = PDI.equalizacaoHistograma(img1, false);
+		atualizaImage3();
+	}
+	
+	@FXML
+	public void identificarCores() {		
+		PDI.identificarCores(Math.min(x1, x2), Math.min(y1, y2), Math.max(x1, x2), Math.max(y1, y2), img1);
+	}
+	
+	@FXML
+	public void grade() {		
+		img3 = PDI.grade(img1, Integer.parseInt(distancia.getText()));
+		atualizaImage3();
+	}
+	
+	@FXML
+	public void efeitoZebrado() {		
+		img3 = PDI.efeitoZebrado(img1, Integer.parseInt(colunas.getText()));
+		atualizaImage3();
+	}
 }
